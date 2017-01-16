@@ -32,7 +32,7 @@ struct Choice
 
 var choices : [Choice] = []
 
-for i in stride(from: 0, through: 999999, by: 1)
+for i in stride(from: 0, through: 99999, by: 1)
 {
     diceOne.append(Int(arc4random_uniform(6))+1)
     diceTwo.append(Int(arc4random_uniform(6))+1)
@@ -54,8 +54,13 @@ for i in stride(from: 2, through: 12, by: 1)
     }
     if let b = probDist[i] as Float?
     {
-        print("\(i): \(b*100)%")
+        print(i)
+        print("\(b*100)%")
     }
+    
+    
 }
+
+
 
 var a = 1
