@@ -42,7 +42,7 @@ for i in stride(from: 0, through: 999999, by: 1)
     count += 1
 }
 
-print(count)
+print("the count is \(count)")
 
 for i in stride(from: 2, through: 12, by: 1)
 {
