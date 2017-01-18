@@ -57,5 +57,3 @@ for i in stride(from: 2, through: 12, by: 1)
         print("\(i): \(b*100)%")
     }
 }
-
-var a = 1
