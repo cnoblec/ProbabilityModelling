@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F3C20631E2FDC6000349399 /* Die.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3C20621E2FDC6000349399 /* Die.swift */; };
 		3F6616E91E2D5715009721DB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6616E81E2D5715009721DB /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3F3C20621E2FDC6000349399 /* Die.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Die.swift; sourceTree = "<group>"; };
 		3F6616E51E2D5715009721DB /* ProbabilityModelling */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ProbabilityModelling; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F6616E81E2D5715009721DB /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				3F6616E81E2D5715009721DB /* main.swift */,
+				3F3C20621E2FDC6000349399 /* Die.swift */,
 			);
 			path = ProbabilityModelling;
 			sourceTree = "<group>";
@@ -120,6 +123,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F3C20631E2FDC6000349399 /* Die.swift in Sources */,
 				3F6616E91E2D5715009721DB /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,6 +254,7 @@
 				3F6616EE1E2D5715009721DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -32,7 +32,7 @@ struct Choice
 
 var choices : [Choice] = []
 
-for i in stride(from: 0, through: 999999, by: 1)
+for i in stride(from: 0, through: 999, by: 1)
 {
     diceOne.append(Int(arc4random_uniform(6))+1)
     diceTwo.append(Int(arc4random_uniform(6))+1)
@@ -57,3 +57,9 @@ for i in stride(from: 2, through: 12, by: 1)
         print("\(i): \(b*100)%")
     }
 }
+
+var a = Die(sides: 20)
+let value2 = a.roll(times: 5)
+print(value2)
+let value = a.roll()
+print(value)
