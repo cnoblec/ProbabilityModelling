@@ -8,17 +8,11 @@
 
 import Foundation
 
-let numberedCube = Die(sides: 6)
 let diceOne = Die(sides: 6)
 let diceTwo = Die(sides: 6)
 var diceOneRolls : [Int] = []
 var diceTwoRolls : [Int] = []
 var diceSum : [Int] = []
-var rolls : [Int] = []
-var differentRolls = [2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0,10:0,11:0,12:0]
-var count = 0
-var probDist: [Int:Float] = [2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0,10:0,11:0,12:0]
-var x = 0
 
 struct Choice
 {
@@ -45,7 +39,7 @@ repeat
         // We have a non-nil value, now to try to get it as an Int
         if let inputAsInteger = Int(input)
         {
-            // Use this input, it's good
+            // Use this input, if its in the right range
             if (inputAsInteger <= diceOne.sides + diceTwo.sides && inputAsInteger > 1)
             {
             tempChoice.value = inputAsInteger
@@ -53,12 +47,11 @@ repeat
             } else {
                 print("Please enter an integer value for your selection")
             }
-            
         } else {
             // Tell the user what they need to do
             print("Please enter an integer value for your selection")
         }
     }
-} while choices.count < 6
+} while choices.count < 5
 
 

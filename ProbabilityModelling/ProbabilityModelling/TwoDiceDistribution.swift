@@ -10,8 +10,12 @@ import Foundation
 
 
 // For modleing the probability of rolling two dice and looking at their distribustion
-
-
+//var differentRolls = [2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0,10:0,11:0,12:0]
+//var probDist: [Int:Float] = [2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0,10:0,11:0,12:0]
+//var diceSum : [Int] = []
+//var count = 0
+//var x = 0
+//
 //for i in stride(from: 0, through: 999, by: 1)
 //{
 //    diceOneRolls.append(Int(arc4random_uniform(6))+1)
