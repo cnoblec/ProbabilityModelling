@@ -8,11 +8,13 @@
 
 import Foundation
 
-let diceOne = Die(sides: 6)
-let diceTwo = Die(sides: 6)
-var diceOneRolls : [Int] = []
-var diceTwoRolls : [Int] = []
-var diceSum : [Int] = []
+let cubeOfNumbers = Die(sides: 6)
+var diceOneRolls : [Int] = cubeOfNumbers.roll(times: 6)!
+var diceTwoRolls : [Int] = cubeOfNumbers.roll(times: 6)!
+var finalScore = 0
+var rounds = 0
+var gameMode = 1
+var repeatedInput = false
 
 struct Choice
 {
@@ -27,11 +29,33 @@ struct Choice
 
 var choices : [Choice] = []
 
+print("Enter 1 for repeats and 0 for no repeats on choices", terminator: "")
+
+// Unwrap the optional (readLine always returns an optional String data type)
+if let input = readLine(strippingNewline: true)
+{
+    // We have a non-nil value, now to try to get it as an Int
+    if let inputAsInteger = Int(input)
+    {
+        // Use this input, if its in the right range
+        if (inputAsInteger <= 1 && inputAsInteger >= 0)
+        {
+            gameMode = inputAsInteger
+        } else {
+            print("Please enter a valid input for your selection")
+        }
+    } else {
+        // Tell the user what they need to do
+        print("Please enter an integer value for your selection")
+    }
+}
+
+
 repeat
 {
     // Prompt the user
     print("Please enter your #\(choices.count + 1) choice ", terminator: "")
-    var tempChoice: Choice = Choice(value: 0, tab: false)
+    var tempChoice: Choice = Choice(value: 0, tab: true)
     
     // Unwrap the optional (readLine always returns an optional String data type)
     if let input = readLine(strippingNewline: true)
@@ -40,11 +64,30 @@ repeat
         if let inputAsInteger = Int(input)
         {
             // Use this input, if its in the right range
-            if (inputAsInteger <= diceOne.sides + diceTwo.sides && inputAsInteger > 1)
+            if (inputAsInteger <= cubeOfNumbers.sides * 2 && inputAsInteger > 1)
             {
-            tempChoice.value = inputAsInteger
-            choices.append(tempChoice)
+                if (gameMode == 0)
+                {
+                    for i in stride(from: 0, through: choices.count - 1, by: 1)
+                    {
+                        if choices[i].value == inputAsInteger
+                        {
+                            repeatedInput = true
+                        }
+                    }
+                    if repeatedInput == false
+                    {
+                        tempChoice.value = inputAsInteger
+                        choices.append(tempChoice)
+                    } else {
+                        print("No repeats are allowed")
+                    }
+                } else {
+                tempChoice.value = inputAsInteger
+                choices.append(tempChoice)
+                }
             } else {
+                // Tell the user what they need to do
                 print("Please enter an integer value for your selection")
             }
         } else {
@@ -52,6 +95,30 @@ repeat
             print("Please enter an integer value for your selection")
         }
     }
+    
 } while choices.count < 5
 
-
+for i in stride(from: 0, through: choices.count - 1, by: 1)
+{
+    var tabSwaps = 0
+    for e in stride(from: 0, through: diceOneRolls.count - 1, by: 1)
+    {
+        if choices[i].value == Int(diceOneRolls[e]) + Int(diceTwoRolls[e])
+        {
+            tabSwaps += 1
+            if (tabSwaps < 3)
+            {
+                choices[i].tab = !choices[i].tab
+            }
+        }
+    }
+    if choices[i].tab == true
+    {
+        finalScore += choices[i].value
+    }
+}
+print("your final score was \(finalScore)")
+for i in stride(from: 0, through: choices.count - 1, by: 1)
+{
+print("the rolls were \(Int(diceOneRolls[i]) + Int(diceTwoRolls[i]))")
+}
