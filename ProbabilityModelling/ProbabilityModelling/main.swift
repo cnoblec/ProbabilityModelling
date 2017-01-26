@@ -50,7 +50,6 @@ if let input = readLine(strippingNewline: true)
     }
 }
 
-
 repeat
 {
     // Prompt the user
@@ -81,10 +80,11 @@ repeat
                         choices.append(tempChoice)
                     } else {
                         print("No repeats are allowed")
+                        repeatedInput = false
                     }
                 } else {
-                tempChoice.value = inputAsInteger
-                choices.append(tempChoice)
+                    tempChoice.value = inputAsInteger
+                    choices.append(tempChoice)
                 }
             } else {
                 // Tell the user what they need to do
@@ -98,27 +98,37 @@ repeat
     
 } while choices.count < 5
 
-for i in stride(from: 0, through: choices.count - 1, by: 1)
+func diceGame(choiceArray: [Choice]) -> Int
 {
-    var tabSwaps = 0
-    for e in stride(from: 0, through: diceOneRolls.count - 1, by: 1)
+    for i in stride(from: 0, through: choices.count - 1, by: 1)
     {
-        if choices[i].value == Int(diceOneRolls[e]) + Int(diceTwoRolls[e])
+        var tabSwaps = 0
+        for e in stride(from: 0, through: diceOneRolls.count - 1, by: 1)
         {
-            tabSwaps += 1
-            if (tabSwaps < 3)
+            if choices[i].value == Int(diceOneRolls[e]) + Int(diceTwoRolls[e])
             {
-                choices[i].tab = !choices[i].tab
+                tabSwaps += 1
+                if (tabSwaps < 3)
+                {
+                    choices[i].tab = !choices[i].tab
+                }
             }
         }
+        if choices[i].tab == true
+        {
+            finalScore += choices[i].value
+        }
     }
-    if choices[i].tab == true
-    {
-        finalScore += choices[i].value
-    }
+    return finalScore
 }
-print("your final score was \(finalScore)")
+
+
+
+print("your final score was \(diceGame(choiceArray: choices))")
+print("the rolls were")
 for i in stride(from: 0, through: choices.count - 1, by: 1)
 {
-print("the rolls were \(Int(diceOneRolls[i]) + Int(diceTwoRolls[i]))")
+    print("\(Int(diceOneRolls[i]) + Int(diceTwoRolls[i]))")
 }
+
+
