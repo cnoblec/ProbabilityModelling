@@ -9,12 +9,13 @@
 import Foundation
 
 let cubeOfNumbers = Die(sides: 6)
-var diceOneRolls : [Int] = cubeOfNumbers.roll(times: 6)!
-var diceTwoRolls : [Int] = cubeOfNumbers.roll(times: 6)!
+var diceOneRolls : [Int] = []
+var diceTwoRolls : [Int] = []
 var finalScore = 0
 var rounds = 0
 var gameMode = 1
 var repeatedInput = false
+var validInput = false
 
 struct Choice
 {
@@ -27,28 +28,34 @@ struct Choice
     }
 }
 
+var choice = Choice.init(value: 0, tab: false)
 var choices : [Choice] = []
 
-print("Enter 1 for repeats and 0 for no repeats on choices", terminator: "")
 
-// Unwrap the optional (readLine always returns an optional String data type)
-if let input = readLine(strippingNewline: true)
+repeat
 {
-    // We have a non-nil value, now to try to get it as an Int
-    if let inputAsInteger = Int(input)
+    print("Enter 1 for repeats and 0 for no repeats on choices ", terminator: "")
+    
+    // Unwrap the optional (readLine always returns an optional String data type)
+    if let input = readLine(strippingNewline: true)
     {
-        // Use this input, if its in the right range
-        if (inputAsInteger <= 1 && inputAsInteger >= 0)
+        // We have a non-nil value, now to try to get it as an Int
+        if let inputAsInteger = Int(input)
         {
-            gameMode = inputAsInteger
+            // Use this input, if its in the right range
+            if (inputAsInteger <= 1 && inputAsInteger >= 0)
+            {
+                validInput = true
+                gameMode = inputAsInteger
+            } else {
+                print("Please enter a valid input for your selection")
+            }
         } else {
-            print("Please enter a valid input for your selection")
+            // Tell the user what they need to do
+            print("Please enter an integer value for your selection")
         }
-    } else {
-        // Tell the user what they need to do
-        print("Please enter an integer value for your selection")
     }
-}
+} while validInput == false
 
 repeat
 {
@@ -95,40 +102,65 @@ repeat
             print("Please enter an integer value for your selection")
         }
     }
-    
 } while choices.count < 5
 
 func diceGame(choiceArray: [Choice]) -> Int
 {
-    for i in stride(from: 0, through: choices.count - 1, by: 1)
+    diceTwoRolls = cubeOfNumbers.roll(times: 6)!
+    diceOneRolls = cubeOfNumbers.roll(times: 6)!
+    var array = choiceArray
+    finalScore = 0
+    for i in stride(from: 0, through: array.count - 1, by: 1)
     {
         var tabSwaps = 0
         for e in stride(from: 0, through: diceOneRolls.count - 1, by: 1)
         {
-            if choices[i].value == Int(diceOneRolls[e]) + Int(diceTwoRolls[e])
+            if array[i].value == Int(diceOneRolls[e]) + Int(diceTwoRolls[e])
             {
                 tabSwaps += 1
                 if (tabSwaps < 3)
                 {
-                    choices[i].tab = !choices[i].tab
+                    array[i].tab = !array[i].tab
                 }
             }
         }
-        if choices[i].tab == true
+        if array[i].tab == true
         {
-            finalScore += choices[i].value
+            finalScore += array[i].value
         }
     }
     return finalScore
 }
 
+var choiceItt : [Choice] = [choice, choice, choice, choice, choice]
 
-
-print("your final score was \(diceGame(choiceArray: choices))")
-print("the rolls were")
-for i in stride(from: 0, through: choices.count - 1, by: 1)
+for a in stride(from: 0, through: 11, by: 1)
 {
-    print("\(Int(diceOneRolls[i]) + Int(diceTwoRolls[i]))")
+    choiceItt[0] = (Choice.init(value: a, tab: false))
+    for b in stride(from: 0, through: 11, by: 1)
+    {
+        choiceItt[1] = (Choice.init(value: b, tab: false))
+        for c in stride(from: 0, through: 11, by: 1)
+        {
+            choiceItt[2] = (Choice.init(value: c, tab: false))
+            for d in stride(from: 0, through: 11, by: 1)
+            {
+                choiceItt[3] = (Choice.init(value: d, tab: false))
+                for e in stride(from: 0, through: 11, by: 1)
+                {
+                    choiceItt[4] = (Choice.init(value: e, tab: false))
+                    print(diceGame(choiceArray: choiceItt))
+                }
+            }
+        }
+    }
 }
+
+// print("your final score was \(diceGame(choiceArray: choices))")
+// print("the rolls were")
+// for i in stride(from: 0, through: choices.count - 1, by: 1)
+// {
+//     print("\(Int(diceOneRolls[i]) + Int(diceTwoRolls[i]))")
+// }
 
 
