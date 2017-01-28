@@ -11,12 +11,13 @@ import Foundation
 let cubeOfNumbers = Die(sides: 6)
 var diceOneRolls : [Int] = []
 var diceTwoRolls : [Int] = []
-var finalScore = 0
 var rounds = 0
 var gameMode = 1
 var repeatedInput = false
 var validInput = false
-var bestChoiceID : [Int] = []
+var testsPerDeck = 10
+
+var topTierChoice: [[Int]] = [[]]
 
 struct Choice
 {
@@ -29,8 +30,6 @@ struct Choice
     }
 }
 
-var bestChoices : [[Choice]] = [[]]
-
 var choice = Choice.init(value: 0, tab: false)
 var choices : [Choice] = []
 
@@ -39,7 +38,7 @@ func diceGame(choiceArray: [Choice]) -> Int
     diceTwoRolls = cubeOfNumbers.roll(times: 6)!
     diceOneRolls = cubeOfNumbers.roll(times: 6)!
     var array = choiceArray
-    finalScore = 0
+    var finalScore = 0
     for i in stride(from: 0, through: array.count - 1, by: 1)
     {
         var tabSwaps = 0
@@ -62,37 +61,42 @@ func diceGame(choiceArray: [Choice]) -> Int
     return finalScore
 }
 
-var choiceItt : [Choice] = [choice, choice, choice, choice, choice]
-var deckID = 0
+var handChoice : [Choice] = [choice, choice, choice, choice, choice]
+var bestChoiceID : [Int] = []
+
 for a in stride(from: 2, through: 12, by: 1)
 {
-    choiceItt[0] = (Choice.init(value: a, tab: false))
+    handChoice[0] = (Choice.init(value: a, tab: false))
     for b in stride(from: 2, through: 12, by: 1)
     {
-        choiceItt[1] = (Choice.init(value: b, tab: false))
+        handChoice[1] = (Choice.init(value: b, tab: false))
         for c in stride(from: 2, through: 12, by: 1)
         {
-            choiceItt[2] = (Choice.init(value: c, tab: false))
+            handChoice[2] = (Choice.init(value: c, tab: false))
             for d in stride(from: 2, through: 12, by: 1)
             {
-                choiceItt[3] = (Choice.init(value: d, tab: false))
+                handChoice[3] = (Choice.init(value: d, tab: false))
                 for e in stride(from: 2, through: 12, by: 1)
                 {
-                    deckID += 1
                     var deckSuccess = 0
-                    choiceItt[4] = (Choice.init(value: e, tab: false))
+                    var topTierHandInt: [Int] = []
+                    handChoice[4] = (Choice.init(value: e, tab: false))
                     //print(diceGame(choiceArray: choiceItt))
                     // try each deck 10 times
-                    for _ in 1...10
+                    for _ in stride(from: 1, through: testsPerDeck, by: 1)
                     {
-                        if (diceGame(choiceArray: choiceItt) == 0)
+                        if (diceGame(choiceArray: handChoice) == 0)
                         {
                             deckSuccess += 1
                         }
                     }
-                    if deckSuccess >= 9
+                    if deckSuccess >= testsPerDeck - 2*testsPerDeck%10
                     {
-                        bestChoiceID.append(deckID)
+                        for card in stride(from: 0, through: handChoice.count - 1, by: 1)
+                        {
+                        topTierHandInt.append(handChoice[card].value)
+                        }
+                        topTierChoice.append(topTierHandInt)
                     }
                 }
             }
@@ -100,7 +104,7 @@ for a in stride(from: 2, through: 12, by: 1)
     }
 }
 
-print(bestChoiceID)
+print(topTierChoice)
 
 // print("your final score was \(diceGame(choiceArray: choices))")
 // print("the rolls were")
