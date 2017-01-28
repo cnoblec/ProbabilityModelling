@@ -15,7 +15,8 @@ var rounds = 0
 var gameMode = 1
 var repeatedInput = false
 var validInput = false
-var testsPerDeck = 10
+var testsPerDeck = 1
+var percentSuccess = 0
 
 var topTierChoice: [[Int]] = [[]]
 
@@ -61,6 +62,60 @@ func diceGame(choiceArray: [Choice]) -> Int
     return finalScore
 }
 
+repeat
+{
+    print("Enter the number of tests you want to run per hand (higher will be more accurate but take much longer): ", terminator: "")
+
+    // Unwrap the optional (readLine always returns an optional String data type)
+    if let input = readLine(strippingNewline: true)
+    {
+        // We have a non-nil value, now to try to get it as an Int
+        if let inputAsInteger = Int(input)
+        {
+            // Use this input, if its in the right range
+            if (inputAsInteger <= 100 && inputAsInteger >= 0)
+            {
+                validInput = true
+                testsPerDeck = inputAsInteger
+            } else {
+                print("Please enter an integer between 0 and 100")
+            }
+        } else {
+            // Tell the user what they need to do
+            print("Please enter an integer between 0 and 100")
+        }
+    }
+} while validInput == false
+
+validInput = false
+
+repeat
+{
+    print("Enter minimun success rate as a percent (ex. 90 for at least 90% success rate, rounds to the nearest 10): ", terminator: "")
+    
+    // Unwrap the optional (readLine always returns an optional String data type)
+    if let input = readLine(strippingNewline: true)
+    {
+        // We have a non-nil value, now to try to get it as an Int
+        if let inputAsInteger = Int(input)
+        {
+            // Use this input, if its in the right range
+            if (inputAsInteger <= 100 && inputAsInteger >= 0)
+            {
+                validInput = true
+                percentSuccess = inputAsInteger
+            } else {
+                print("Please enter an integer between 0 and 100")
+            }
+        } else {
+            // Tell the user what they need to do
+            print("Please enter an integer between 0 and 100")
+        }
+    }
+} while validInput == false
+
+print("This will take a second, the program is checking every possible hand...")
+
 var handChoice : [Choice] = [choice, choice, choice, choice, choice]
 var bestChoiceID : [Int] = []
 
@@ -90,7 +145,7 @@ for a in stride(from: 2, through: 12, by: 1)
                             deckSuccess += 1
                         }
                     }
-                    if deckSuccess >= testsPerDeck - 2*testsPerDeck%10
+                    if deckSuccess >= testsPerDeck - (100-percentSuccess)/10*(testsPerDeck/10)
                     {
                         for card in stride(from: 0, through: handChoice.count - 1, by: 1)
                         {
@@ -103,6 +158,8 @@ for a in stride(from: 2, through: 12, by: 1)
         }
     }
 }
+
+print("The choices with at least \((testsPerDeck - (100-percentSuccess)/10*(testsPerDeck/10))*100/(testsPerDeck))% success rate are...")
 
 print(topTierChoice)
 
