@@ -18,7 +18,6 @@ class Die
     func roll(times: Int = 1) -> [Int]?
     {
         var ret: [Int] = []
-        print(times)
         if times > 0 {
             for _ in stride(from: 1, through: times, by: 1)
             {
