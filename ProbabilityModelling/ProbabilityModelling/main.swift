@@ -35,26 +35,34 @@ struct Choice
 var choice = Choice.init(value: 0, tab: false)
 var choices : [Choice] = []
 
+
+// a function to call to return a score for a game
 func diceGame(choiceArray: [Choice]) -> Int
 {
-    diceTwoRolls = cubeOfNumbers.roll(times: 6)!
-    diceOneRolls = cubeOfNumbers.roll(times: 6)!
+    diceTwoRolls = cubeOfNumbers.roll(times: choiceArray.count - 1)!
+    diceOneRolls = cubeOfNumbers.roll(times: choiceArray.count - 1)!
     var array = choiceArray
     var finalScore = 0
-    for i in stride(from: 0, through: array.count - 1, by: 1)
+    
+    // itterate the length of the choices given and check if we need to toggle the tab
+    
+    for i in stride(from: 0, through: choiceArray.count - 1, by: 1)
     {
-        var tabSwaps = 0
+        // to keep track of how many times we take it off the tab
+        var tabToggle = 0
         for e in stride(from: 0, through: diceOneRolls.count - 1, by: 1)
         {
-            if array[i].value == Int(diceOneRolls[e]) + Int(diceTwoRolls[e])
+            if choiceArray[i].value == Int(diceOneRolls[e]) + Int(diceTwoRolls[e])
             {
-                tabSwaps += 1
-                if (tabSwaps < 3)
+                tabToggle += 1
+                if (tabToggle < 3)
                 {
+                    // invert if its on the tab or not
                     array[i].tab = !array[i].tab
                 }
             }
         }
+        // calculate the score based off of values when tab is true
         if array[i].tab == true
         {
             finalScore += array[i].value
@@ -92,8 +100,6 @@ repeat
 if programMode == 1
 {
     // For taking input and trying what the user provided the fuctionality for different game modes is built in already
-    
-    
     repeat
     {
         print("Enter 1 for repeats and 0 for no repeats on choices ", terminator: "")
@@ -166,10 +172,11 @@ if programMode == 1
         }
     } while choices.count < 5
     
-    print("your final score was \(diceGame(choiceArray: choices))")
+    print("Your final score was \(diceGame(choiceArray: choices))")
+    print("The rolls were... ")
     for i in stride(from: 0, through: choices.count - 1, by: 1)
     {
-        print("the rolls were \(Int(diceOneRolls[i]) + Int(diceTwoRolls[i]))")
+        print("\(Int(diceOneRolls[i]) + Int(diceTwoRolls[i]))")
     }
     
 } else if programMode == 2 {
@@ -231,6 +238,8 @@ if programMode == 1
     var handChoice : [Choice] = [choice, choice, choice, choice, choice]
     var bestChoiceID : [Int] = []
     
+    
+    // nestsed for loop, to get every combnation
     for a in stride(from: 2, through: 12, by: 1)
     {
         handChoice[0] = (Choice.init(value: a, tab: false))
@@ -245,6 +254,7 @@ if programMode == 1
                     handChoice[3] = (Choice.init(value: d, tab: false))
                     for e in stride(from: 2, through: 12, by: 1)
                     {
+                        // local to sort and keep track of the hand and its success
                         var deckSuccess = 0
                         var topTierHandInt: [Int] = []
                         handChoice[4] = (Choice.init(value: e, tab: false))
@@ -257,6 +267,7 @@ if programMode == 1
                                 deckSuccess += 1
                             }
                         }
+                        // take the given success percent and round to 10% and then using that only choose the hands with that given success rate.
                         if deckSuccess >= testsPerDeck - (100-percentSuccess)/10*(testsPerDeck/10)
                         {
                             for card in stride(from: 0, through: handChoice.count - 1, by: 1)
