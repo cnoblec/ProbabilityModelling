@@ -166,7 +166,11 @@ if programMode == 1
         }
     } while choices.count < 5
     
-    
+    print("your final score was \(diceGame(choiceArray: choices))")
+    for i in stride(from: 0, through: choices.count - 1, by: 1)
+    {
+        print("the rolls were \(Int(diceOneRolls[i]) + Int(diceTwoRolls[i]))")
+    }
     
 } else if programMode == 2 {
     repeat
