@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		3F1AE71A1E3297940014412B /* TwoDiceDistribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1AE7191E3297940014412B /* TwoDiceDistribution.swift */; };
 		3F3C20631E2FDC6000349399 /* Die.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3C20621E2FDC6000349399 /* Die.swift */; };
+		3F47DD611E45037C0052D90E /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F47DD601E45037C0052D90E /* Prompt.swift */; };
+		3F47DD631E450EC30052D90E /* Simulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F47DD621E450EC30052D90E /* Simulation.swift */; };
+		3F47DD651E450F1D0052D90E /* DiceGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F47DD641E450F1D0052D90E /* DiceGame.swift */; };
 		3F6616E91E2D5715009721DB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6616E81E2D5715009721DB /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +30,9 @@
 /* Begin PBXFileReference section */
 		3F1AE7191E3297940014412B /* TwoDiceDistribution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoDiceDistribution.swift; sourceTree = "<group>"; };
 		3F3C20621E2FDC6000349399 /* Die.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Die.swift; sourceTree = "<group>"; };
+		3F47DD601E45037C0052D90E /* Prompt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prompt.swift; sourceTree = "<group>"; };
+		3F47DD621E450EC30052D90E /* Simulation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Simulation.swift; sourceTree = "<group>"; };
+		3F47DD641E450F1D0052D90E /* DiceGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiceGame.swift; sourceTree = "<group>"; };
 		3F6616E51E2D5715009721DB /* ProbabilityModelling */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ProbabilityModelling; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F6616E81E2D5715009721DB /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -64,6 +70,9 @@
 				3F6616E81E2D5715009721DB /* main.swift */,
 				3F3C20621E2FDC6000349399 /* Die.swift */,
 				3F1AE7191E3297940014412B /* TwoDiceDistribution.swift */,
+				3F47DD601E45037C0052D90E /* Prompt.swift */,
+				3F47DD621E450EC30052D90E /* Simulation.swift */,
+				3F47DD641E450F1D0052D90E /* DiceGame.swift */,
 			);
 			path = ProbabilityModelling;
 			sourceTree = "<group>";
@@ -126,7 +135,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F47DD651E450F1D0052D90E /* DiceGame.swift in Sources */,
 				3F3C20631E2FDC6000349399 /* Die.swift in Sources */,
+				3F47DD611E45037C0052D90E /* Prompt.swift in Sources */,
+				3F47DD631E450EC30052D90E /* Simulation.swift in Sources */,
 				3F6616E91E2D5715009721DB /* main.swift in Sources */,
 				3F1AE71A1E3297940014412B /* TwoDiceDistribution.swift in Sources */,
 			);
